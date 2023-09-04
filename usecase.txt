@@ -1,0 +1,49 @@
+gloud init
+
+gsutil mb -l europe-west2 -c standard gs://gcp_people
+
+
+gsutil ls
+
+gsutil cp c:\\users\Lakshmi\Downloads\dim_customer.csv gs://gcp_people
+
+gsutil ls gs://gcp_people/
+
+bq mk -d --default_table_expiration 3600 --description "this is my dataset." dataset_satish
+
+bq ls
+
+bq mk -t dataset_satish.ramreddy customer_code:string,customer:string,platform:string,channel:string,market:string,sub_zone:string,region:string
+
+
+bq show dataset_satish.ramreddy
+
+bq mk -d --default_table_expiration 3600 --description "this is my dataset." history_sarat 
+
+bq ls
+
+
+bq mk -t history_sarat.nani customer_code:integer,customer:string,platform:string,channel:string,market:string,subzone:string,region:string,pincode:integer,nativeplace:string
+
+bq show history_sarat.nani
+
+bq query --use_legacy_sql=false insert into history_sarat.nani select cast(customer_code as INTEGER),customer STRING,platform STRING,channel STRING,market STRING,sub_zone STRING,region STRING,58534 as pincode, 'hyderabad' as nativeplace from dataset_satish.ramreddy
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
